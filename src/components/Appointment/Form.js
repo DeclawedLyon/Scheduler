@@ -6,7 +6,7 @@ import Button from "components/Button";
 export default function From(props) {
   const [name, setName] = useState(props.name || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
-  console.log(props);
+  // console.log("Application--Props:",props);
 
   const reset = () => {
     setName("")
@@ -36,7 +36,7 @@ export default function From(props) {
       <section className="appointment__card-right">
         <section className="appointment__actions">
           <Button danger onClick={cancel}>Cancel</Button>
-          <Button confirm onClick={props.onSave}>Save</Button>
+          <Button confirm onClick={() => props.onSave(name, interviewer)}>Save</Button>
         </section>
       </section>
     </main>
