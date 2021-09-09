@@ -19,9 +19,8 @@ const getAppointmentsForDay = function(state, day) {
   let filteredDate = state.days.filter(element => element.name === day);
 
   const foundDate = filteredDate[0];
-  if(!foundDate) {
-    return [];
-  }
+  if(!foundDate) return [];
+  
   // let filteredAppointments = [];
   // for (let appointment of foundDate.appointments) {
   //   filteredAppointments.push(state.appointments[appointment])
