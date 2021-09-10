@@ -18,73 +18,9 @@ export default function Application(props) {
     cancelInterview
   } = useApplicationData();
 
-  // const setDay = day => setState({ ...state, day });
-
-  // console.log("state before:", state)
-  // useEffect(() => {
-    // Promise.all([
-      // axios.get('/api/days'),
-      // axios.get('/api/appointments'),
-      // axios.get('/api/interviewers')
-    // ]).then((results) => {
-      // console.log(results);
-      // setDays(results[0].data);
-      // setState(prev => ({ ...prev, days: results[0].data, appointments: results[1].data, interviewers: results[2].data }));
-      // console.log("state after: ",state);
-      // setAppointments(results[1].data);
-      // setInterviewers(results[2].data);
-    // });
-  // }, []);
-  // console.log("state",state);
-  // console.log("days",state.days)
-  // console.log("appointments",state.appointments)
-  // console.log("interviewers:",state.interviewers)
-
   dailyAppointments = getAppointmentsForDay(state, state.day);
   dailyInterviewers = getInterviewersForDay(state);
-  // console.log("test", dailyAppointments);
-
-  // const bookInterview = (id, interview) => {
-  //   return axios.put(`/api/appointments/${id}`, { interview }).then(() => {
-  //     const appointment = {
-  //       ...state.appointments[id],
-  //       interview: { ...interview }
-  //     };
-  //     const appointments = {
-  //       ...state.appointments,
-  //       [id]: appointment
-  //     };
-  //     const newState = {
-  //       ...state,
-  //       appointments
-  //     }
-  //     setState(prev => {
-  //       return { ...prev, appointments }
-  //     })
-  //   })
-  // }
-
-  // const deleteInterview = (id) => {
-  //   return axios.delete(`/api/appointments/${id}`).then(() => {
-  //     const appointment = {
-  //       ...state.appointments[id],
-  //       interview: null
-  //     };
-  //     const appointments = {
-  //       ...state.appointments,
-  //       [id]: appointment
-  //     };
-  //     const newState = {
-  //       ...state,
-  //       appointments,
-
-  //     }
-  //     setState(prev => {
-  //       return { ...prev, appointments }
-  //     })
-  //   })
-  // }
-
+ 
   const mappedAppointments = dailyAppointments.map(appointment => {
     // console.log("mapped appointments:",appointment);
     const interview = getInterview(state, appointment.interview)
@@ -98,9 +34,6 @@ export default function Application(props) {
       cancelInterview={cancelInterview}
     />
   })
-
-  // console.log("appointment: ", appointment);
-  // console.log("appointments-- ", appointments);
 
   return (
     <main className="layout">
