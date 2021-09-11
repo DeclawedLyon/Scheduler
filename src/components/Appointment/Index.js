@@ -37,13 +37,13 @@ export default function Appointment({props, time, interview, interviewers, id, b
   
     bookInterview(id, interview)
       .then(() => transition(SHOW))
-      .catch(error => transition(ERROR_SAVE, true));
+      .catch(error => transition(ERROR_SAVE));
   }
   function deleteAppointment(id) {
     transition(DELETING, true);
     cancelInterview(id)
     .then(() => transition(EMPTY))
-    .catch(error => transition(ERROR_DELETE, true))
+    .catch(error => transition(ERROR_DELETE))
   }
   return (
       <article className="appointment">
@@ -61,7 +61,6 @@ export default function Appointment({props, time, interview, interviewers, id, b
             interviewers = {interviewers}
             onCancel={() => back()}
             onSave={save}
-            // transition={transition}
             />
             )}
           {mode === SAVING && (<Status message="Saving..." />)}
@@ -78,7 +77,7 @@ export default function Appointment({props, time, interview, interviewers, id, b
             interviewer={interview.interviewer}
             onCancel={() => back()}
             onSave={save}
-            // transition={transition}
+            transition={transition}
             />
           )}
           {mode === ERROR_DELETE && 

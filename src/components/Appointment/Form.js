@@ -7,7 +7,6 @@ export default function From(props) {
   const [name, setName] = useState(props.name || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
   const [error, setError] = useState("");
-  console.log("Application--Props:", props);
 
   const reset = () => {
     setName("")
@@ -24,9 +23,9 @@ export default function From(props) {
       setError("Student name cannot be blank");
       return Promise.resolve({});
     }
-
-    props.onSave(name, interviewer);
-  }
+    setError('')
+    return Promise.resolve(props.onSave(name, interviewer));
+}
 
   return (
     <main className="appointment__card appointment__card--create">
@@ -54,7 +53,7 @@ export default function From(props) {
             validate()
               .then(() => {
                 if (name !== "") {
-                  props.transition("SHOW")
+                  props.transition("SAVING")
                 } else {
                   props.transition("CREATE")
                 }

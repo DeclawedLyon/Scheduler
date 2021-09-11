@@ -1,31 +1,11 @@
 const getAppointmentsForDay = function(state, day) {
-  //iteration
-
-  // let filteredDate = [];
-  // for(let eachDay of state.days) {
-  //   if (eachDay.name === day) {
-  //     filteredDate.push(eachDay);
-  //   }
-  // }
-
-  //with map
-  // let filteredDate = state.days.map(element => {
-  //   if (element.name === day) {
-  //     return element;
-  //   }
-  // })
-
-  //with filter
   let filteredDate = state.days.filter(element => element.name === day);
-
   const foundDate = filteredDate[0];
+
   if(!foundDate) return [];
-  
-  // let filteredAppointments = [];
-  // for (let appointment of foundDate.appointments) {
-  //   filteredAppointments.push(state.appointments[appointment])
-  // }
+
   let filteredAppointments = foundDate.appointments.map(appointment => state.appointments[appointment])
+  
   return filteredAppointments;
 }
 
