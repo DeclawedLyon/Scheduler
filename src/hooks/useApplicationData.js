@@ -42,6 +42,9 @@ export default function useApplicationData() {
           return { ...prev, appointments, days }
         })
       })
+      .catch((e) => {
+        console.log("error:", e)
+      })
   }
 
   const cancelInterview = (id) => {

@@ -22,10 +22,16 @@ export default function From(props) {
     if (name === "") {
       setError("Student name cannot be blank");
       return Promise.resolve({});
+    } else if (!interviewer) {
+      setError('')
+      return Promise.resolve({})
     }
-    setError('')
-    return Promise.resolve(props.onSave(name, interviewer));
-}
+    // console.log("interviewer:", interviewer, "name:", name)
+    // console.log("interviewers are--", props.interviewers)
+    let interviewerName = props.interviewers[interviewer - 1]["name"]
+    console.log("interviewername",interviewerName)
+    return Promise.resolve(props.onSave(name, interviewerName));
+  }
 
   return (
     <main className="appointment__card appointment__card--create">
@@ -51,16 +57,16 @@ export default function From(props) {
           <Button danger onClick={cancel}>Cancel</Button>
           <Button confirm onClick={(event) => {
             validate()
-              .then(() => {
-                if (name !== "") {
-                  props.transition("SAVING")
-                } else {
-                  props.transition("CREATE")
-                }
-              })
-              .catch(() => {
-                props.transition("ERROR_SAVE", true)
-              })
+            .then(() => {
+              if (name !== '' && interviewer !== null) {
+                props.transition('SHOW');
+              } else {
+                props.transition('CREATE');
+              }
+            })
+            .catch((e) => {
+              props.transition('ERROR_SAVE');
+            });
           }}>Save</Button>
         </section>
       </section>
