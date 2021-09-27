@@ -23,6 +23,10 @@ export default function From(props) {
       setError("Student name cannot be blank");
       return Promise.resolve({});
     }
+    if (!interviewer) {
+      setError('An interviewer must be selected');
+      return Promise.resolve({});
+    }
     setError('')
     return Promise.resolve(props.onSave(name, interviewer));
 }
@@ -52,7 +56,7 @@ export default function From(props) {
           <Button confirm onClick={(event) => {
             validate()
               .then(() => {
-                if (name !== "") {
+                if (name !== "" && interviewer) {
                   props.transition("SAVING")
                 } else {
                   props.transition("CREATE")
