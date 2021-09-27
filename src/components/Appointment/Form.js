@@ -26,12 +26,13 @@ export default function From(props) {
       setError('')
       return Promise.resolve({})
     }
-    // console.log("interviewer:", interviewer, "name:", name)
-    // console.log("interviewers are--", props.interviewers)
-    let interviewerName = props.interviewers[interviewer - 1]["name"]
-    console.log("interviewername",interviewerName)
-    return Promise.resolve(props.onSave(name, interviewerName));
-  }
+    if (!interviewer) {
+      setError('An interviewer must be selected');
+      return Promise.resolve({});
+    }
+    setError('')
+    return Promise.resolve(props.onSave(name, interviewer));
+}
 
   return (
     <main className="appointment__card appointment__card--create">
@@ -57,16 +58,16 @@ export default function From(props) {
           <Button danger onClick={cancel}>Cancel</Button>
           <Button confirm onClick={(event) => {
             validate()
-            .then(() => {
-              if (name !== '' && interviewer !== null) {
-                props.transition('SHOW');
-              } else {
-                props.transition('CREATE');
-              }
-            })
-            .catch((e) => {
-              props.transition('ERROR_SAVE');
-            });
+              .then(() => {
+                if (name !== "" && interviewer) {
+                  props.transition("SAVING")
+                } else {
+                  props.transition("CREATE")
+                }
+              })
+              .catch(() => {
+                props.transition("ERROR_SAVE", true)
+              })
           }}>Save</Button>
         </section>
       </section>
