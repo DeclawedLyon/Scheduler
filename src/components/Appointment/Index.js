@@ -61,6 +61,7 @@ export default function Appointment({props, time, interview, interviewers, id, b
             interviewers = {interviewers}
             onCancel={() => back()}
             onSave={save}
+            transition={transition}
             />
             )}
           {mode === SAVING && (<Status message="Saving..." />)}
