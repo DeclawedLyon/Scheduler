@@ -21,9 +21,10 @@ export default function useApplicationData() {
     });
   }, []);
 
-  const bookInterview = async(id, interview) => {
-    return await axios.put(`/api/appointments/${id}`, { interview })
+  const bookInterview = (id, interview) => {
+    return axios.put(`/api/appointments/${id}`, { interview })
       .then(() => {
+        console.log(`Inside the book interview, the id is: ${id} and the interview is: ${interview}`)
         const appointment = {
           ...state.appointments[id],
           interview: { ...interview }

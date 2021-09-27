@@ -29,7 +29,10 @@ export default function From(props) {
     // console.log("interviewer:", interviewer, "name:", name)
     // console.log("interviewers are--", props.interviewers)
     let interviewerName = props.interviewers[interviewer - 1]["name"]
-    console.log("interviewername",interviewerName)
+    // console.log("interviewername",interviewerName)
+    let help = Promise.resolve(props.onSave(name, interviewerName));
+    console.log("shiiiiiiiiiiiiiiiit", help)
+
     return Promise.resolve(props.onSave(name, interviewerName));
   }
 
@@ -57,7 +60,8 @@ export default function From(props) {
           <Button danger onClick={cancel}>Cancel</Button>
           <Button confirm onClick={(event) => {
             validate()
-            .then(() => {
+            .then((x) => {
+              console.log("helloooooooooooo",x)
               if (name !== '' && interviewer !== null) {
                 props.transition('SHOW');
               } else {
