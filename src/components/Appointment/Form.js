@@ -23,12 +23,8 @@ export default function From(props) {
       setError("Student name cannot be blank");
       return Promise.resolve({});
     } else if (!interviewer) {
-      setError('')
+      setError('Please select an interviewer')
       return Promise.resolve({})
-    }
-    if (!interviewer) {
-      setError('An interviewer must be selected');
-      return Promise.resolve({});
     }
     setError('')
     return Promise.resolve(props.onSave(name, interviewer));
