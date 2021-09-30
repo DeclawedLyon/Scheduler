@@ -4,13 +4,14 @@ import InterviewerList from "components/InterviewerList";
 import Button from "components/Button";
 
 export default function From(props) {
-  const [interviewer, setInterviewer] = useState(props.interviewer || null);
+  const [interviewer, setInterviewer] = useState(props.interviewer.id || null);
   const [name, setName] = useState(props.name || "");
   const [error, setError] = useState("");
 
   const reset = () => {
     setName("")
     setInterviewer(null)
+    setError("")
   }
 
   const cancel = () => {
@@ -22,7 +23,9 @@ export default function From(props) {
     if (name === "") {
       setError("Student name cannot be blank");
       return Promise.resolve({});
-    } else if (!interviewer) {
+    } 
+    console.log("interviewer",interviewer)
+    if (!interviewer) {
       setError('Please select an interviewer');
       return Promise.resolve({});
     }

@@ -54,7 +54,7 @@ export default function Appointment({props, time, interview, interviewers, id, b
           {mode === SHOW && (
             <Show
                 student={interview.student}
-                interviewer={interview.interviewer}
+                interviewer={interview.interviewer ? interview.interviewer : "unassigned"}
                 onDelete={() => transition(CONFIRM)}
                 onEdit={() => transition(EDIT)} 
                 />)}
@@ -69,9 +69,9 @@ export default function Appointment({props, time, interview, interviewers, id, b
           {mode === SAVING && (<Status message="Saving..." />)}
           {mode === CONFIRM && (
             <Confirm 
-              onConfirm={() => deleteAppointment(id)}
-              onCancel={() => {back()}}
-              />)}
+            onConfirm={() => deleteAppointment(id)}
+            onCancel={() => {back()}}
+            />)}
           {mode === DELETING && (<Status message="Deleting..."/>)}
           {mode === EDIT && (
             <Form 
@@ -81,6 +81,7 @@ export default function Appointment({props, time, interview, interviewers, id, b
             onCancel={() => back()}
             onSave={save}
             transition={transition}
+            interviewer={interview.interviewer}
             />
           )}
           {mode === ERROR_DELETE && 
