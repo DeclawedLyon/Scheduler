@@ -4,8 +4,8 @@ import InterviewerList from "components/InterviewerList";
 import Button from "components/Button";
 
 export default function From(props) {
-  const [name, setName] = useState(props.name || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
+  const [name, setName] = useState(props.name || "");
   const [error, setError] = useState("");
 
   const reset = () => {
@@ -23,10 +23,10 @@ export default function From(props) {
       setError("Student name cannot be blank");
       return Promise.resolve({});
     } else if (!interviewer) {
-      setError('Please select an interviewer')
-      return Promise.resolve({})
+      setError('Please select an interviewer');
+      return Promise.resolve({});
     }
-    setError('')
+    setError('');
     return Promise.resolve(props.onSave(name, interviewer));
 }
 
@@ -53,17 +53,17 @@ export default function From(props) {
         <section className="appointment__actions">
           <Button danger onClick={cancel}>Cancel</Button>
           <Button confirm onClick={(event) => {
-            validate()
-              .then(() => {
-                if (name !== "" && interviewer) {
-                  props.transition("SAVING")
-                } else {
-                  props.transition("CREATE")
-                }
-              })
-              .catch(() => {
-                props.transition("ERROR_SAVE", true)
-              })
+              validate()
+                .then(() => {
+                  if (name !== '' && interviewer) {
+                    props.transition('SHOW');
+                  } else {
+                    props.transition('CREATE');
+                  }
+                })
+                .catch(() => {
+                  props.transition('ERROR_SAVE');
+                });
           }}>Save</Button>
         </section>
       </section>

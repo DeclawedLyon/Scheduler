@@ -28,7 +28,7 @@ export default function Appointment({props, time, interview, interviewers, id, b
   );
 
   function save(name, interviewer) {
-    console.log("name", name, "interviewer", interviewer)
+    // console.log("name", name, "interviewer", interviewer)
     const interview = {
       student: name,
       interviewer
@@ -46,7 +46,7 @@ export default function Appointment({props, time, interview, interviewers, id, b
     .then(() => transition(EMPTY))
     .catch(error => transition(ERROR_DELETE))
   }
-  console.log("interview is: ", interview)
+  // console.log("interview is: ", interview)
   return (
       <article className="appointment">
           <Header time={time} />
