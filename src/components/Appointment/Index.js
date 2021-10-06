@@ -37,6 +37,7 @@ export default function Appointment({props, time, interview, interviewers, id, b
     transition(SAVING, true);
   
     bookInterview(id, interview)
+      .then(() => transition(SAVING))
       .then(() => transition(SHOW))
       .catch(error => transition(ERROR_SAVE));
   }
@@ -46,7 +47,7 @@ export default function Appointment({props, time, interview, interviewers, id, b
     .then(() => transition(EMPTY))
     .catch(error => transition(ERROR_DELETE))
   }
-  // console.log("interview is: ", interview)
+  console.log("interviewers is: ", interviewers)
   return (
       <article className="appointment">
           <Header time={time} />
@@ -61,7 +62,7 @@ export default function Appointment({props, time, interview, interviewers, id, b
           {mode === CREATE && (
             <Form 
             interviewers = {interviewers}
-            onCancel={() => back()}
+            onCancel={back}
             onSave={save}
             transition={transition}
             />

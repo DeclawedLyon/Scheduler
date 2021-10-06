@@ -4,7 +4,7 @@ import InterviewerList from "components/InterviewerList";
 import Button from "components/Button";
 
 export default function From(props) {
-  const [interviewer, setInterviewer] = useState(props.interviewer.id || null);
+  const [interviewer, setInterviewer] = useState(props.interviewer ? props.interviewer.id : null);
   const [name, setName] = useState(props.name || "");
   const [error, setError] = useState("");
 

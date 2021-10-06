@@ -18,9 +18,16 @@ const getInterview = function(state, interview){
   return null
 }
 
-const getInterviewersForDay = function(state) {
+const getInterviewersForDay = function(state, day) {
+  let filteredDate = state.days.filter(element => element.name === day);
+  const foundDate = filteredDate[0];
+  console.log(filteredDate)
+  if(foundDate === undefined || foundDate.interviewers.length === 0) {
+    return [];
+  }
   const dataArray = []
-  for (const interviewer in state.interviewers) {
+  for (const interviewer of foundDate.interviewers) {
+    console.log(interviewer)
       dataArray.push(state.interviewers[interviewer])
   }
   return dataArray
