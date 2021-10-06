@@ -37,15 +37,15 @@ export default function Appointment({props, time, interview, interviewers, id, b
     transition(SAVING, true);
   
     bookInterview(id, interview)
-      .then(() => transition(SAVING))
+      // .then(() => transition(SAVING))
       .then(() => transition(SHOW))
-      .catch(error => transition(ERROR_SAVE));
+      .catch(error => transition(ERROR_SAVE, true));
   }
   function deleteAppointment(id) {
     transition(DELETING, true);
     cancelInterview(id)
     .then(() => transition(EMPTY))
-    .catch(error => transition(ERROR_DELETE))
+    .catch(error => transition(ERROR_DELETE, true))
   }
   console.log("interviewers is: ", interviewers)
   return (

@@ -9,7 +9,7 @@ export default function useApplicationData() {
     interviewers: []
   });
 
-  const setDay = day => setState({ ...state, day });
+  const setDay = day => setState(prev => ({ ...prev, day }));
 
   useEffect(() => {
     Promise.all([
@@ -33,16 +33,17 @@ export default function useApplicationData() {
       [id]: appointment
     };
 
-    const days = updateSpots(state, appointments);
     
     return axios.put(`/api/appointments/${id}`, {interview})
-    .then(
-      setState({
-        ...state,
+    .then(() => {
+
+      const days = updateSpots(state, appointments);
+      setState(prev => ({
+        ...prev,
         appointments,
         days
-      })
-    )
+      }))
+    })
   }
 
   function cancelInterview(id, interview) {
@@ -57,17 +58,11 @@ export default function useApplicationData() {
       [id]: appointment
     };
 
-    setState({
-      ...state,
-      appointments
-    });
-
-    const days = updateSpots(state, appointments);
-
+    
     return axios.delete(`/api/appointments/${id}`, {interview})
-      .then( () => {
+    .then( () => {
+        const days = updateSpots(state, appointments);
         setState(prev => ({...prev, appointments, days}))
-
       }
     )
   }
@@ -87,7 +82,6 @@ export default function useApplicationData() {
         spots++;
       }
     } 
-      // console.log("spots = ", spots);
       // 5) update new day with spots
       const newDay = {...dayObj, spots}
   
@@ -96,24 +90,6 @@ export default function useApplicationData() {
 
       return newDays;
   }
-
-  // const updateSpots = function (appointmentId) {
-  //   let counter = 0
-  //   const newDaysArray = state.days.map(day => {
-  //     if (day.name === state.day) {
-  //       if (state.appointments[appointmentId].interview === null) {
-  //         const spots = day.spots - 1;
-  //         return { ...day, spots };
-  //       }
-  //       const spots = day.spots + 1;
-  //       return { ...day, spots };
-  //     }
-  //     return { ...day };
-  //   })
-  //   return newDaysArray;
-  // };
-
-
 
 
 

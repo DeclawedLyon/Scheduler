@@ -22,15 +22,15 @@ export default function From(props) {
   function validate() {
     if (name === "") {
       setError("Student name cannot be blank");
-      return Promise.resolve({});
-    } 
-    console.log("interviewer",interviewer)
-    if (!interviewer) {
+      // return Promise.resolve({});
+    } else if (!interviewer) {
       setError('Please select an interviewer');
-      return Promise.resolve({});
+      // return Promise.resolve({});
+    } else {
+      setError('');
+      props.onSave(name, interviewer)    
     }
-    setError('');
-    return Promise.resolve(props.onSave(name, interviewer));
+    // return Promise.resolve(props.onSave(name, interviewer));
 }
 
   return (
@@ -57,16 +57,16 @@ export default function From(props) {
           <Button danger onClick={cancel}>Cancel</Button>
           <Button confirm onClick={(event) => {
               validate()
-                .then(() => {
-                  if (name !== '' && interviewer) {
-                    props.transition('SHOW');
-                  } else {
-                    props.transition('CREATE');
-                  }
-                })
-                .catch(() => {
-                  props.transition('ERROR_SAVE');
-                });
+                // .then(() => {
+                //   if (name !== '' && interviewer) {
+                //     props.transition('SHOW');
+                //   } else {
+                //     props.transition('CREATE');
+                //   }
+                // })
+                // .catch(() => {
+                //   props.transition('ERROR_SAVE');
+                // });
           }}>Save</Button>
         </section>
       </section>
